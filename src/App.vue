@@ -11,10 +11,15 @@ export default {
 </script>
 
 <style lang="less">
-body {
-  padding: 0;
-  margin: 0;
-  #app {
-  }
+html,
+body,
+#app {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  position: relative;
+  z-index: -2;
+  background-color: #efeff4;
+  -webkit-overflow-scrolling: touch;
 }
 </style>
