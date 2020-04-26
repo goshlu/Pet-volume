@@ -19,7 +19,8 @@ body,
   margin: 0 auto;
   position: relative;
   z-index: -2;
-  background-color: #efeff4;
+  /*background-color: #efeff4;*/
+  background: #fafafa;
   -webkit-overflow-scrolling: touch;
 }
 </style>

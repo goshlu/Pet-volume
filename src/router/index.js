@@ -12,6 +12,11 @@ const router = new Router({
       children: []
     },
     {
+      path:'/Search',
+      name:'search',
+      component:resolve => require(['@/pages/Search.vue'], resolve),
+    },
+    {
       path: "/Login",
       name: 'login',
       component: resolve => require(['@/pages/Login.vue'], resolve),
@@ -20,7 +25,22 @@ const router = new Router({
       path:'/Classify',
       name:'classfiy',
       component:resolve => require(['@/pages/Classify.vue'],resolve),
-    } 
+    },
+    {
+      path:'/ShopDetails',
+      name:'shopDetails',
+      component:resolve => require(['@/pages/ShopDetails.vue'],resolve)
+    },
+    {
+      path:'/Person',
+      name:'person',
+      component:resolve => require(['@/pages/Person.vue'],resolve)
+    },
+    {
+      path:"/Coupons",
+      name:"coupons",
+      component:resolve => require(['@/pages/Coupons.vue'],resolve)
+    }
   ]
 });
 // 导航守卫;

@@ -1,6 +1,4 @@
-import {
-  Service
-} from "./api";
+import { Service } from "./api";
 //实例
 export function getConfigsByProductId(productId) {
   return Service({

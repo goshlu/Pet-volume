@@ -8,7 +8,7 @@
         inactive-color="#949497"
         style="z-index: 100;"
       >
-        <van-tabbar-item name="index" to="/index">
+        <van-tabbar-item name="index" to="/">
           <span>首页</span>
           <img
             slot="icon"
@@ -25,7 +25,7 @@
           />
         </van-tabbar-item>
         <!-- <van-tabbar-item name="shopCart" to="/shopCart" :info="count"> -->
-        <van-tabbar-item name="shopCart" to="/shopCart">
+        <van-tabbar-item name="shopCart" to="" @click="ToastU">
           <span>购物车</span>
           <img
             slot="icon"
@@ -33,7 +33,7 @@
             :src="props.active ? icon_cart.active : icon_cart.normal"
           />
         </van-tabbar-item>
-        <van-tabbar-item name="mine" to="/mine">
+        <van-tabbar-item name="mine" to="/Person">
           <span>我的</span>
           <img
             slot="icon"
@@ -53,20 +53,20 @@ export default {
   data () {
     return {
       icon_home: {
-        normal: require('../assets/imgs/c3.png'),
+        normal: require('../assets/imgs/c3_1.png'),
         active: require('../assets/imgs/c3.png')
       },
       icon_classify: {
         normal: require('../assets/imgs/c1.png'),
-        active: require('../assets/imgs/c1.png')
+        active: require('../assets/imgs/c1_1.png')
       },
       icon_cart: {
         normal: require('../assets/imgs/c2.png'),
-        active: require('../assets/imgs/c2.png')
+        active: require('../assets/imgs/c2_1.png')
       },
       icon_mine: {
         normal: require('../assets/imgs/c4.png'),
-        active: require('../assets/imgs/c4.png')
+        active: require('../assets/imgs/c4_1.png')
       },
       active: 0
     }
@@ -88,7 +88,11 @@ export default {
   beforeDestroy () {
     // 如果传递了this，这里就不需要手动的off销毁eventBus订阅的事件了
   },
-  methods: {}
+  methods: {
+    ToastU(){
+      this.$toast('功能暂未开通，敬请期待！')
+    }
+  }
 }
 </script>
 

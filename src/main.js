@@ -3,9 +3,9 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import EventBus from './utils/eventBus'
 // import '@/icons' // icon
-// import store from './store'
-
+import store from './store/index.js'
 Vue.config.productionTip = false
 import 'amfe-flexible/index.js' //引入适配文件
 
@@ -58,7 +58,7 @@ import {
 } from 'vant'
 // Vue.use(VueAwesomeSwiper)
 // Vue.use(axios)
-// Vue.use(EventBus)
+Vue.use(EventBus)
 // Vue.use(VueClipboard)
 
 Vue.use(Tabbar).use(TabbarItem).use(Button).use(NavBar).use(Search).use(Icon).use(Picker).use(ActionSheet).use(Field).use(Cell).use(CellGroup)
@@ -71,7 +71,7 @@ Vue.use(Tabbar).use(TabbarItem).use(Button).use(NavBar).use(Search).use(Icon).us
 new Vue({
   el: '#app',
   router,
-  //store, //store:store和router挂载实例
+  store, //store:store和router挂载实例
   components: {
     App
   },

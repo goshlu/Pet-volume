@@ -1,18 +1,17 @@
 <template>
   <div>
-    <div class="home">
+    <div class="main">
       <!-- logo -->
       <!-- <div class="title">拜家宠商城</div> -->
       <!-- 搜索条 -->
       <header class="home-header" :class="{'active' : headerActive}">
-        <div class="header-search">
-          <!-- <svg-icon class="search-icon" icon-class="search"></svg-icon> -->
+        <!-- <div class="header-search">
           <div class="search-icon">
-            <img src="../assets/imgs/search.png" alt />
+            <van-icon name="chat-o" />
           </div>
-          <input :value="keywords" class="search-title" />
-        </div>
-        <!-- <svg-icon class="customer-service-icon" icon-class="customer-service"></svg-icon> -->
+          <router-link tag="span" class="search-title" :to="{name:'search'}">进口狗粮</router-link>
+        </div>-->
+        <van-search v-model="keyworld" @focus="onSearch" placeholder="进口狗粮" />
       </header>
       <!-- 首页轮播 -->
       <van-swipe class="swiper-carousel" :autoplay="3000" :show-indicators="false">
@@ -74,12 +73,16 @@
       <!-- 商品列表 -->
       <div class="goodsList">
         <ul>
-          <li v-for="(item,index) in goodsList" :key="index">
+          <li v-for="(item,index) in goodsList" :key="index" @click="$router.push('/ShopDetails')">
             <img src="../assets/imgs/shop.png" alt />
             <div class="list">
               <p class="name">{{item.name}}</p>
-              <p class="present"><span>颗粒 | 卵磷脂</span></p>
-              <p class="coupon"><span>店铺卷满99减5</span></p>
+              <p class="present">
+                <span>颗粒 | 卵磷脂</span>
+              </p>
+              <p class="coupon">
+                <span>店铺卷满99减5</span>
+              </p>
               <span class="price">￥ 68.00</span>
               <span class="choose">立即选购</span>
             </div>
@@ -92,6 +95,7 @@
 </template>
 <script>
 import Tabbar from "../components/tabbar.vue";
+
 export default {
   name: "Index",
   components: {
@@ -100,7 +104,7 @@ export default {
   data() {
     return {
       active: 0,
-      keywords: "进口狗粮",
+      keyworld: "",
       catList: [],
       recommendList: [
         { imgUrl: require("../assets/imgs/goods.png"), name: "美国麦德氏钙片" },
@@ -112,9 +116,9 @@ export default {
         { name: "美国麦德氏 IN-PLUS日常" },
         { name: "美国麦德氏 IN-PLUS日常" }
       ],
-      adImages:[
-        {imgUrl: 'https://img.yzcdn.cn/vant/apple-1.jpg',},
-        {imgUrl: 'https://img.yzcdn.cn/vant/apple-2.jpg',}
+      adImages: [
+        { imgUrl: "https://img.yzcdn.cn/vant/apple-1.jpg" },
+        { imgUrl: "https://img.yzcdn.cn/vant/apple-2.jpg" }
       ],
       loading: true,
       headerActive: false,
@@ -143,19 +147,19 @@ export default {
     };
   },
   computed: {
-    price: () => {
-      return (this.price = "￥" + this.price);
-    }
+    /*     Fixed: (val) => {
+              return '￥'+val.Fixed(2);
+            } */
   },
   /* activated() {
-    this.initData(); //初始数据
-    this.handelTabChange();
-  },
-  watch: {
-    active() {
-      this.tabItemLists = [];
-    }
-  }, */
+          this.initData(); //初始数据
+          this.handelTabChange();
+        },
+        watch: {
+          active() {
+            this.tabItemLists = [];
+          }
+        }, */
   mounted() {
     // this.$eventBus.$emit("changeTag", 0);
     // this.setHomeWrapperHeight();
@@ -165,33 +169,37 @@ export default {
     onchange() {
       // this.$router.push('/Login')
     },
-    /*     //当滑块滑动到底部的时候
-    handelScorllToEnd() {
-      this.pageNum++;
-      this.handelTabChange();
+    //搜索跳转
+    onSearch(){
+      this.$router.push('/Search')
     },
-    //动态设置searc-wrap的高
-    setHomeWrapperHeight() {
-      let $screenHeight = document.documentElement.clientHeight;
-      this.$refs.homeWrapper.style.height = $screenHeight - 100 + "px";
-    }, */
+    /*     //当滑块滑动到底部的时候
+            handelScorllToEnd() {
+              this.pageNum++;
+              this.handelTabChange();
+            },
+            //动态设置searc-wrap的高
+            setHomeWrapperHeight() {
+              let $screenHeight = document.documentElement.clientHeight;
+              this.$refs.homeWrapper.style.height = $screenHeight - 100 + "px";
+            }, */
     //initData
     /* initData() {
-      this.$http.get("/").then(res => {
-        let data = res.data.content;
-        this.images = data.bannerList;
-        this.adList = data.adList;
-        this.catList = data.catList;
-        this.iconList = data.iconList;
-      });
-    },
-    handelTabChange() {
-      this.loading = true;
-      this.$http.get("/").then(res => {
-        this.loading = true;
-        if (res) this.tabItemLists.push(...res.data.content);
-      });
-    },*/
+              this.$http.get("/").then(res => {
+                let data = res.data.content;
+                this.images = data.bannerList;
+                this.adList = data.adList;
+                this.catList = data.catList;
+                this.iconList = data.iconList;
+              });
+            },
+            handelTabChange() {
+              this.loading = true;
+              this.$http.get("/").then(res => {
+                this.loading = true;
+                if (res) this.tabItemLists.push(...res.data.content);
+              });
+            },*/
     handleClick(linkUrl) {
       this.$router.push("/");
     }
@@ -200,9 +208,11 @@ export default {
 </script>
 <style lang="less" scoped>
 @import url("./../styles/base.less");
-.home {
+
+.main {
   width: 100%;
   height: 100%;
+
   .title {
     width: 100%;
     height: 44px;
@@ -211,21 +221,22 @@ export default {
     font-size: 20px;
     background: rgba(255, 255, 255, 1);
   }
+
   .home-header {
     position: fixed;
     width: 100%;
     top: 5px;
-    // background: ();
-    background-size: 100% 100%;
-    padding: 8px 8px 15px 8px;
-    height: 55/2px;
+    background: #fafafa;
+    // background-size: 100% 100%;
     display: flex;
+    // border-radius: 10px;
     justify-content: center;
     align-items: center;
     // @include boxSizing;
     font-size: 30/2px;
     color: #999;
     z-index: 10000;
+
     .header-search {
       border-radius: 20px;
       display: flex;
@@ -236,6 +247,7 @@ export default {
       color: #232326;
       background: #fff;
       border: 1px solid #ccc;
+
       .search-icon {
         // border: 1px solid red;
         // line-height: 15px;
@@ -246,40 +258,48 @@ export default {
           padding: 5px;
         }
       }
+
       .app-name {
         padding: 0 10px;
         color: #f63515;
         font-size: 20px;
         font-weight: bold;
       }
+
       .icon-search {
         padding: 0 10px;
         font-size: 17px;
       }
+
       .search-title {
-        font-size: 8px;
+        font-size: 11px;
         color: #ccc;
         // width: 100%;
         padding-left: 10px;
       }
     }
+
     .customer-service-icon {
       margin-top: 5px;
     }
   }
+
   .swiper-carousel {
     padding-bottom: 5px;
     margin-top: 40px;
     // background: url('../../assets/image/home_big_rand.png') no-repeat center bottom;
     background-size: 100% 6%;
+
     .lazy_img {
       width: 100%;
       height: 210px;
     }
   }
+
   .swiper-cls {
     background-color: #efeff4;
     position: relative;
+
     .swiper-slide {
       padding-left: 16px;
       background-color: #efeff4;
@@ -287,33 +307,40 @@ export default {
       justify-content: center;
       align-items: center;
     }
+
     .slide_img {
       width: 222px;
       height: 90px;
       border-radius: 5px;
     }
+
     .radian-img {
       position: absolute;
       bottom: -9px;
       margin-left: 40px;
     }
   }
+
   .home-tags {
     margin-top: 23px;
+
     .tags-content {
       display: flex;
       justify-content: space-around;
       align-items: center;
       padding: 0 10px;
+
       .tags-item {
-        display: felx;
+        display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+
         .tags-icon {
           width: 43px;
           height: 43px;
         }
+
         .item-text {
           padding-top: 5px;
           font-size: 11px;
@@ -322,10 +349,12 @@ export default {
       }
     }
   }
+
   .content {
     width: 715/2px;
     margin: 0 auto;
     background: rgba(255, 255, 255, 0.3);
+
     .tag-menu {
       ul {
         width: 350px;
@@ -338,6 +367,7 @@ export default {
         border-radius: 10px;
         box-shadow: 6px 5px 5px #eee;
         background: #fff;
+
         li {
           width: 60px;
           // border: 0.5px solid green;
@@ -350,6 +380,7 @@ export default {
             // display: inline-block;
             // border: .5px solid firebrick;
           }
+
           span {
             // margin-bottom: -15px;
             position: absolute;
@@ -364,6 +395,7 @@ export default {
         }
       }
     }
+
     .ad {
       width: 690 / 2px;
       height: 170/2px;
@@ -371,9 +403,11 @@ export default {
       // border: 1px solid gray;
       border-radius: 40px;
       background: #ffb18a;
+
       .ad-items {
         width: 100%;
         height: 100%;
+
         img {
           width: 100%;
           height: 100%;
@@ -381,13 +415,16 @@ export default {
         }
       }
     }
+
     .recommend {
       margin: 0 5px;
+
       ul {
         display: flex;
         flex: 1;
         justify-content: space-around;
         position: relative;
+
         li {
           // position: absolute;
           position: relative;
@@ -402,6 +439,7 @@ export default {
             top: 0;
             z-index: 100;
           }
+
           .l2 {
             width: 176/2px;
             height: 140/2px;
@@ -410,6 +448,7 @@ export default {
             bottom: 25px;
             z-index: 99;
           }
+
           .good-content {
             width: 110px;
             height: 31px;
@@ -418,6 +457,7 @@ export default {
             position: absolute;
             bottom: 0;
             border: 0.5px solid red;
+
             .good-title {
               font-size: 10px;
               color: #fff;
@@ -426,6 +466,7 @@ export default {
               left: 5px;
               top: 9px;
             }
+
             .Snapped {
               font-size: 4px;
               position: absolute;
@@ -441,6 +482,7 @@ export default {
         }
       }
     }
+
     .like {
       width: 556/2px;
       height: 102/2px;
@@ -450,14 +492,16 @@ export default {
       background-size: 100% 100%;
     }
   }
+
   .goodsList {
     display: flex;
     flex: 1;
     position: relative;
+
     ul {
       display: flex;
       flex-wrap: wrap;
-      width: 710/2px;
+      width: 680/2px;
       margin: 0 auto;
       justify-content: space-between;
       // border: 1px solid red;
@@ -465,6 +509,9 @@ export default {
         width: 320/2px;
         height: 430/2px;
         position: relative;
+        background: #ffff;
+        margin-top: 5px;
+
         img {
           width: 214/2px;
           height: 218/2px;
@@ -472,38 +519,46 @@ export default {
           left: 20px;
           top: 31/2px;
         }
+
         .list {
           position: absolute;
           top: 130px;
           left: 21/2px;
+
           .name {
             font-size: 12px;
-            font-weight: bold;
+            font-weight: 400;
             text-align: center;
           }
+
           .present {
             // display: block;
             font-size: 8px;
             color: #ffb945;
             padding: 5px 0;
-            span{
-              background: #FFEDCF;
+
+            span {
+              background: #ffedcf;
             }
           }
+
           .coupon {
             font-size: 11px;
             // display: block;
             color: #ff7051;
-            span{
-              border: .5px solid #FF5325;
-              padding: 2.5px;
+
+            span {
+              border: 0.5px solid #ff5325;
+              padding: 1px;
             }
           }
+
           .price {
             font-size: 14px;
             color: #333333;
             font-weight: bold;
           }
+
           .choose {
             font-size: 19/2px;
             background: #ffa40e;
