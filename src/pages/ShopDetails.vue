@@ -1,10 +1,12 @@
 <template>
   <div class="main">
-    <CMHeader title="商品详情">
-      <span class="header_back" slot="left" @click="$router.back()">
-         <img src="../assets/imgs/icon_back@2x.png" alt="">
-      </span>
-    </CMHeader>
+    <header>
+      <Theader title="商品详情">
+        <span class="header_back" slot="left" @click="$router.back()">
+          <img src="../assets/imgs/icon_back@2x.png" alt />
+        </span>
+      </Theader>
+    </header>
     <div class="goodSwipe">
       <van-swipe>
         <van-swipe-item v-for="(image, index) in images" :key="index">
@@ -42,6 +44,18 @@
         <span class="right">剩余15月</span>
       </div>
     </div>
+    <!-- 优惠卷 -->
+    <div class="item-center">
+      <div class="left">
+        <div class="left-main">
+          <img src="../assets/imgs/money_2.png" width="15" height="15" alt />
+          <span class="left-price">8</span>
+        </div>
+        <div class="left-title">使用期限：20/04/10-20/04/40</div>
+      </div>
+      <div class="ht"></div>
+      <div class="right-title">立即领劵</div>
+    </div>
     <!-- 店铺推荐 -->
     <div class="shop-rc">
       <span>店铺推荐</span>
@@ -62,21 +76,21 @@
     <!-- 加入购物车 -->
     <div class="shopCart">
       <van-goods-action>
-        <van-goods-action-icon icon="chat-o" text="客服" @click="onClickIcon" />
+        <van-goods-action-icon icon="star" color="#ff5000" text="收藏" @click="onClickIcon" />
         <van-goods-action-icon icon="cart-o" text="购物车" @click="onClickIcon" />
-        <van-goods-action-button type="warning" text="加入购物车" @click="onClickButton" />
-        <van-goods-action-button type="danger" text="立即购买" @click="onClickButton" />
+        <!-- <van-goods-action-button type="warning" text="加入购物车" @click="onClickButton" /> -->
+        <van-goods-action-button type="danger" text="领劵购买" @click="onClickButton" />
       </van-goods-action>
     </div>
   </div>
 </template>
 <script>
-import CMHeader from "../components/header";
+import Theader from "../components/header";
 
 export default {
   name: "shopDetails",
   components: {
-    CMHeader
+    Theader
   },
   data() {
     return {
@@ -89,10 +103,10 @@ export default {
   },
   methods: {
     onClickIcon() {
-      Toast("点击图标");
+      this.$toast("点击图标");
     },
     onClickButton() {
-      Toast("点击按钮");
+      this.$toast("点击按钮");
     }
   }
 };
@@ -103,17 +117,17 @@ export default {
   width: 100%;
   position: relative;
 
-  .header-box{
+  .header-box {
     background: #ffa449;
   }
 
-  .header_back{
+  .header_back {
     position: absolute;
     left: 10px;
     z-index: 300;
     top: 42%;
     transform: translateY(-50%);
-    img{
+    img {
       width: 17/2px;
       height: 27/2px;
     }
@@ -133,12 +147,13 @@ export default {
     background: #fff;
     margin: 10px auto;
     border-radius: 10px;
-    box-shadow: 0px 1px 3px 0px #9c9c9c;
+    box-shadow: 0 0 1px 0 #9c9c9c;
 
     .name {
       font-size: 13px;
       font-weight: 600;
-      text-align: center;
+      // text-align: center;
+      padding-left: 20px;
       padding-top: 10px;
     }
 
@@ -150,7 +165,7 @@ export default {
       .price-now {
         font-size: 14px;
         color: #ff5656;
-        padding: 20/2px 0 0 40/2px;
+        padding: 10px 0 0 20px;
       }
 
       .price-old {
@@ -162,7 +177,7 @@ export default {
           margin-top: 5px;
           position: absolute;
           left: 0;
-          bottom: 0;
+          bottom: 1.5px;
           text-decoration: line-through;
         }
       }
@@ -189,7 +204,7 @@ export default {
     margin: 5px auto;
     background: #fff;
     border-radius: 10px;
-    box-shadow: 0px 1px 3px 0px #9c9c9c;
+    box-shadow: 0 0 1px 0px #9c9c9c;
 
     .ls1 {
       padding-top: 10px;
@@ -200,7 +215,7 @@ export default {
       img {
         float: right;
         padding-right: 5px;
-        padding-top: 7px;
+        // padding-top: 7px;
         width: 4.5px;
         height: 7px;
       }
@@ -212,9 +227,8 @@ export default {
     }
 
     .ls2 {
-      padding: 7px 0;
+      padding: 7px 0 7px 20px;
       color: #999999;
-      padding-left: 20px;
       font-size: 10.5px;
 
       span {
@@ -224,19 +238,64 @@ export default {
 
       .right {
         padding-right: 5px;
-        /*padding-top: 7px;*/
         float: right;
       }
     }
   }
-
+  .item-center {
+    width: 100%;
+    height: 90px;
+    margin: 10px auto;
+    position: relative;
+    border-radius: 10px;
+    background: url("../assets/info/7f246a888cf00bc002fdfb2962c93da.png")
+      no-repeat center;
+    background-size: 100% 100%;
+    .left {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      .left-main {
+        position: relative;
+        .left-price {
+          font-size: 55/2px;
+          color: #f03e3e;
+          padding-top: 10px;
+        }
+        img {
+          margin-left: 15px;
+        }
+      }
+      .left-title {
+        color: #f03e3e;
+        font-size: 11px;
+        // padding: 10px 10px;
+        padding-left: 10px;
+      }
+    }
+    .ht {
+      position: absolute;
+      right: 127px;
+      top: 10px;
+      height: 56px;
+      width: 0.5px;
+      border-left: 1.2px dashed #f03e3e;
+      z-index: 333;
+    }
+    .right-title {
+      font-size: 12px;
+      position: absolute;
+      right: 40px;
+      top: 30px;
+      color: #fff;
+    }
+  }
   .shop-rc {
-    padding: 20px 0;
+    // padding: 20px 0;
     font-size: 13px;
     color: #ff5656;
     text-align: center;
     position: relative;
-
     span::after,
     span::before {
       content: ""; /*CSS伪类用法*/
@@ -256,13 +315,11 @@ export default {
     }
   }
   .goodList {
-    // margin: 15px 0;
     display: flex;
     flex: 1;
     position: relative;
 
     ul {
-      // border: 1px solid red;
       display: flex;
       flex-wrap: wrap;
       width: 650/2px;
@@ -270,7 +327,6 @@ export default {
       justify-content: space-between;
 
       li {
-        // border: 1px solid red;
         width: 320/2px;
         height: 389/2px;
         position: relative;
@@ -301,6 +357,7 @@ export default {
         .choose {
           font-size: 19/2px;
           background: #ffa40e;
+          color:#ffffff;
           border-radius: 7.5px;
           padding: 2px 10px 3px 7px;
         }

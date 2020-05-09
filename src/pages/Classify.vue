@@ -2,7 +2,7 @@
   <div class="classify">
     <div class="title-text">商品分类</div>
     <van-loading class="home-loading" v-show="loading" color="#EC3924" size="25px" type="spinner" />
-    <van-search v-model="keyworld" @focus="onSearch" placeholder="请输入搜索关键词" />
+    <van-search v-model="keyword" @focus="onSearch" placeholder="请输入搜索关键词" />
     <section class="search-wrap" ref="searchWrap">
       <!-- 侧边分类 -->
       <list-scroll :scroll-data="categoryData" class="nav-side-wrapper">
@@ -43,15 +43,12 @@
                     <div
                       class="product-item"
                       @click="selectProduct()"
-                      v-for="(product,index) in productImgs"
+                      v-for="(product,index) in products"
                       :key="index"
                     >
                       <img class="item-img" v-lazy="product.imgUrl" />
                       <div class="product-title">{{product.label}}</div>
                     </div>
-                  
-                  
-                  
                   </div>
                   <!-- 猫猫区域 -->
                   <div class="ls-title">
@@ -65,10 +62,10 @@
                     <div
                       class="product-item"
                       @click="selectProduct()"
-                      v-for="(product,index) in productImgs"
+                      v-for="(product,index) in products"
                       :key="index"
                     >
-                      <img class="item-img" v-lazy="product.imgUrl" />
+                      <img class="item-img" v-lazy="product.imgUrl" width="57" height="57" />
                       <div class="product-title">{{product.label}}</div>
                     </div>
                   </div>
@@ -79,20 +76,18 @@
         </div>
       </list-scroll>
     </section>
-    <tabbar></tabbar>
+    <tabBar></tabBar>
   </div>
 </template>
 
 <script>
 import ListScroll from "../components/ListScroll";
-// import cmheader from "../components/header";
-import tabbar from "../components/tabbar";
+import tabBar from "../components/tabbar";
 
 export default {
   components: {
     ListScroll,
-    // cmheader,
-    tabbar
+    tabBar
   },
   name: "classify",
   data() {
@@ -100,7 +95,7 @@ export default {
       tags: [],
       currentIndex: 0,
       loading: false,
-      keyworld:'',
+      keyword:'',
       categoryData: [
         { label: "主粮",},
         { label: "零食" },
@@ -109,7 +104,7 @@ export default {
         { label: "保健" },
         { label: "美容" }
       ],
-      productImgs: [
+      products: [
         {
           label: "进口狗粮",
           imgUrl: require("../assets/classfiy/p1 (1).jpg")
@@ -163,10 +158,11 @@ export default {
       this.$refs.searchWrap.style.height = $screenHeight - 100 + "px";
     },
     selectProduct(product) {
-      this.$router.push({
+      /* this.$router.push({
         path: "/classify/classifySearch",
         query: { categoryId: product.value, product: product }
-      });
+      }); */
+      this.$router.push("/Classify/ShopList")
     }
   },
   mounted() {
@@ -220,18 +216,19 @@ export default {
           width: 100%;
           height: 77px;
           text-align: center;
-          font-weight: 600;
-          font-size: 14px;
+          font-weight: 500;
+          font-size: 13px;
           display: flex;
           justify-content: center;
           align-items: center;
           color: #949497;
           flex-direction: column;
           &.active {
-            color: #ec3924;
+            color: #ffa449;
             border-left: 3px solid transparent;
-            border-color: #ec3924;
+            border-color: #ffa449;
             background: #fff;
+            font-size: 14px;
           }
         }
       }
@@ -252,16 +249,17 @@ export default {
             display: flex;
             position: relative;
             .goods-title {
-              font-size: 12px;
+              font-size: 13px;
               color: #333;
-              font-weight: 600;
+              font-weight: 500;
               padding-bottom: 10px;
             }
             span{
               font-size:11px;
               position: absolute;
               right: 20px;
-              top: 15px;
+              top: 0px;
+              
             }
             img{
               position: absolute;
@@ -309,7 +307,7 @@ export default {
               .product-title {
                 color: #333;
                 font-size: 13px;
-                font-weight: 600;
+                font-weight: 500;
                 // width: 50%;
                 white-space: nowrap;
               }

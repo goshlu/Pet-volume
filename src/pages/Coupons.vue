@@ -6,7 +6,7 @@
       </span>
     </THeader>
     <section>
-      <van-tabs v-model="active">
+      <van-tabs v-model="active" color="#fff" background="#ffa449" title-active-color="#fff">
         <van-tab title="未使用">
           <div class="content">
             <ul>
@@ -137,7 +137,7 @@ export default {
   }
 };
 </script>
-<style lang="less">
+<style lang="less" scoped>
 .main {
   width: 100%;
   background: #efefef;

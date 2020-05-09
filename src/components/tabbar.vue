@@ -24,8 +24,7 @@
             :src="props.active ? icon_classify.active : icon_classify.normal"
           />
         </van-tabbar-item>
-        <!-- <van-tabbar-item name="shopCart" to="/shopCart" :info="count"> -->
-        <van-tabbar-item name="shopCart" to="" @click="ToastU">
+        <van-tabbar-item name="shopCart" to="" @click="handelClick">
           <span>购物车</span>
           <img
             slot="icon"
@@ -89,7 +88,7 @@ export default {
     // 如果传递了this，这里就不需要手动的off销毁eventBus订阅的事件了
   },
   methods: {
-    ToastU(){
+    handelClick(){
       this.$toast('功能暂未开通，敬请期待！')
     }
   }

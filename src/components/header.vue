@@ -20,6 +20,7 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+@import url("../styles/index.less");
 .header-box {
   width: 100%;
   display: flex;
@@ -30,14 +31,13 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 333;
+  z-index: 3333;
 
   .header-left {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     left: 8px;
-    /*border: 1px solid red;*/
     z-index: 100;
 
     img {
@@ -57,9 +57,12 @@ export default {
     text-align: center;
     width: 118/2px;
     font-size: 14.5px;
-    font-weight: 600;
+    font-family: PingFangSC-bold;
     color: #fff;
     flex: 1;
+  }
+  .header_title_text {
+    font-family: PingFangSC-bold;
   }
 
   .header-right {

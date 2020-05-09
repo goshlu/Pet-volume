@@ -4,38 +4,38 @@
     <section>
       <div class="Head-portrait">
         <img src="../assets/imgs/login-pace.png" alt />
-        <span class="login">立即登录</span>
+        <span class="login" @click="$router.push('/Login/PwdLogin')">立即登录</span>
       </div>
       <div class="order">
         <span class="name">我的订单</span>
         <img src="../assets/imgs/icon-back-order.png" alt class="order-right" />
         <div class="order-prs">
           <div class="prs-1">
-            <img src="../assets/imgs/dfk.png" alt />
+            <img src="../assets/imgs/dfk.png" width="22" height="21" alt />
             <span>待付款</span>
           </div>|
           <div class="prs-2">
-            <img src="../assets/imgs/sfh.png" alt />
+            <img src="../assets/imgs/sfh.png" width="22" height="20" alt />
             <span>代收款</span>
           </div>
         </div>
       </div>
       <div class="person-menu">
         <ul>
-          <li>
-            <img src="../assets/imgs/heart.png" alt />
+          <router-link tag="li" to="/Person/Collection">
+            <img src="../assets/imgs/heart.png" width="25" height="21.5" alt />
             <span>我的收藏</span>
-          </li>
-          <li @click="$router.push('/Coupons')">
-            <img src="../assets/imgs/yhj.png" alt />
-            <span>&nbsp;&nbsp;优惠卷&nbsp;</span>
-          </li>
-          <li>
-            <img src="../assets/imgs/sz.png" alt />
-            <span>&nbsp;&nbsp;设&nbsp;&nbsp;置</span>
-          </li>
-          <li>
-            <img src="../assets/imgs/kf.png" alt />
+          </router-link>
+          <router-link tag="li" to="/Person/Coupons">
+            <img src="../assets/imgs/yhj.png" width="27" height="17" alt />
+            <span class="li-title-3">&nbsp;&nbsp;优惠卷&nbsp;</span>
+          </router-link>
+          <router-link tag="li" to="/Person/Set">
+            <img src="../assets/imgs/sz.png" width="24" height="24" alt />
+            <span>&nbsp;&nbsp;设置</span>
+          </router-link>
+          <li @click="handelShowPopup">
+            <img src="../assets/imgs/kf.png" width="24" height="24" alt />
             <span>联系客服</span>
           </li>
         </ul>
@@ -47,16 +47,35 @@
 <script>
 import CmHeader from "../components/header";
 import Tabbar from "../components/tabbar.vue";
+import Vue from 'vue';
+import { Dialog } from 'vant';
+
+// 全局注册
+Vue.use(Dialog);
 export default {
   name: "person",
   components: {
     CmHeader,
     Tabbar
+  },
+  data() {
+    return {
+      show: false
+    };
+  },
+
+  methods: {
+    handelShowPopup() {
+      Dialog.alert({
+        message: "客服电话 : 4008-777-818"
+      });
+    }
   }
 };
 </script>
-<style lang="less">
+<style lang="less" scoped>
 .main {
+  width: 100%;
   .title-text {
     width: 100%;
     text-align: center;
@@ -97,11 +116,11 @@ export default {
       background: #fff;
       border-radius: 10px;
       z-index: 333;
-      box-shadow: 0px 1px 3px 0px #9c9c9c;
+      box-shadow: 0 1px 1px 0 #9c9c9c;
       .name {
         padding: 65/2px 0 0 20px;
         font-size: 14.5px;
-        font-weight: 600;
+        // font-weight: 600;
       }
       .order-right {
         float: right;
@@ -114,10 +133,6 @@ export default {
         font-size: 11px;
         display: flex;
         padding: 30px 0 33px 60px;
-        img {
-          width: 22px;
-          height: 21px;
-        }
         .prs-1 {
           display: flex;
           margin-right: 50px;
@@ -143,22 +158,24 @@ export default {
       top: -10px;
       border-radius: 10px;
       background: #fff;
-      box-shadow: 0px 1px 3px 0px #9c9c9c;
+      box-shadow: 0 1px 1px 0 #9c9c9c;
       ul {
         display: flex;
         justify-content: space-around;
+        justify-self: center;
+        justify-items: center;
         li {
           padding: 15px 0;
           font-size: 11px;
-
           span {
             text-align: center;
             display: block;
           }
+          .li-title-3 {
+            margin-top: 6px;
+          }
           img {
             margin-left: 10px;
-            width: 50/2px;
-            height: 43/2px;
           }
         }
       }
